@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Crm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Country="US" Name="Database MySQL" Version="6" SupportsEmojis="true" ListPageSize="0">
+  <Number Prefix="AsIs" MaxLength="[MaxLength]" />
+  <Connection MaxConcurrentRequests="2" />
+  <Parameters>
+    <Parameter Name="Server" Type="String" Parent="General Configuration" Editor="String" Title="Server:" />
+    <Parameter Name="Port" Type="String" Parent="General Configuration" Editor="String" Title="Port:" />
+    <Parameter Name="Database" Type="String" Parent="General Configuration" Editor="String" Title="Database:" />
+    <Parameter Name="Username" Type="String" Parent="General Configuration" Editor="String" Title="Username:" />
+    <Parameter Name="Password" Type="Password" Parent="General Configuration" Editor="String" Title="Password:" />
+    <Parameter Name="LookupSQLStatement" Type="String" Parent="General Configuration" Editor="Sql" Title="Lookup By Number SQL Statement:" />
+    <Parameter Name="LookupByEmailSQLStatement" Type="String" Parent="General Configuration" Editor="Sql" Title="Lookup By Email SQL Statement:" />
+    <Parameter Name="SearchContactsSQLStatement" Type="String" Parent="General Configuration" Editor="Sql" Title="Search Contacts SQL Statement:" />
+    <Parameter Name="ContactUrlPrefix" Type="String" Parent="General Configuration" Editor="Sql" Title="Contact URL Prefix:" Default="https://mycrmurl/contacts/" />
+    <Parameter Name="ContactUrlSuffix" Type="String" Parent="General Configuration" Editor="Sql" Title="Contact URL Suffix:" Default="/show" />
+    <Parameter Name="ReportCallEnabled" Type="Boolean" Editor="String" Title="Enable Call Journaling" Default="False" />
+    <Parameter Name="ReportCallSQLStatement" Type="String" Parent="ReportCallEnabled" Editor="Sql" Title="Call Journaling SQL Statement:" />
+    <Parameter Name="ReportChatEnabled" Type="Boolean" Editor="String" Title="Enable Chat Journaling" Default="False" />
+    <Parameter Name="ReportChatSQLStatement" Type="String" Parent="ReportChatEnabled" Editor="Sql" Title="Chat Journaling SQL Statement:" />
+    <Parameter Name="CreateContactEnabled" Type="Boolean" Editor="String" Title="Allow contact creation directly to your CRM using 3CX Web Client" Default="False" />
+    <Parameter Name="CreateContactFromClientSQLStatement" Type="String" Parent="CreateContactEnabled" Editor="Sql" Title="Contact Creation from Client SQL Statement:" />
+  </Parameters>
+  <Authentication Type="No" />
+  <Scenarios>
+    <Scenario Type="SQLDatabase">
+      <Query DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[LookupSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="LookupByEmail" Type="SQLDatabase">
+      <Query DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[LookupByEmailSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="SearchContacts" Type="SQLDatabase">
+      <Query DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[SearchContactsSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="GetAllContacts" Type="SQLDatabase">
+      <Query DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[GetAllContactsSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="ReportCall" Type="SQLDatabase">
+      <Query SkipIf="[ReportCallEnabled]!=True" DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[ReportCallSQLStatement]" />
+      <Variables />
+      <Outputs AllowEmpty="false" />
+    </Scenario>
+    <Scenario Id="ReportChat" Type="SQLDatabase">
+      <Query SkipIf="[ReportChatEnabled]!=True" DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[ReportChatSQLStatement]" />
+      <Variables />
+      <Outputs AllowEmpty="false" />
+    </Scenario>
+    <Scenario Id="CreateContactRecord" Type="SQLDatabase">
+      <Query SkipIf="[CreateContactEnabled]!=True||[IIf([CreateOnCallDirection]==Inbound,[CallDirection]!=Inbound,False)]==True" DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[CreateContactSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+    <Scenario Id="CreateContactRecordFromClient" Type="SQLDatabase">
+      <Query SkipIf="[CreateContactEnabled]!=True" DatabaseType="MySQL" ConnectionString="Server=[Server];Port=[Port];Database=[Database];User Id=[Username];Password=[Password]" StatementPasses="2" Statement="[CreateContactFromClientSQLStatement]" />
+      <Rules>
+        <Rule Type="Any" Ethalon="">contactid</Rule>
+      </Rules>
+      <Variables>
+        <Variable Name="ContactID">contactid<Filter /></Variable>
+        <Variable Name="FirstName">firstname<Filter /></Variable>
+        <Variable Name="LastName">lastname<Filter /></Variable>
+        <Variable Name="CompanyName">companyname<Filter /></Variable>
+        <Variable Name="Email">email<Filter /></Variable>
+        <Variable Name="PhoneMobile">phonemobile<Filter /></Variable>
+        <Variable Name="PhoneMobile2">phonemobile2<Filter /></Variable>
+        <Variable Name="PhoneHome">phonehome<Filter /></Variable>
+        <Variable Name="PhoneHome2">phonehome2<Filter /></Variable>
+        <Variable Name="PhoneBusiness">phonebusiness<Filter /></Variable>
+        <Variable Name="PhoneBusiness2">phonebusiness2<Filter /></Variable>
+        <Variable Name="PhoneOther">phoneother<Filter /></Variable>
+        <Variable Name="FaxBusiness">faxbusiness<Filter /></Variable>
+        <Variable Name="FaxHome">faxhome<Filter /></Variable>
+        <Variable Name="Pager">pager<Filter /></Variable>
+        <Variable Name="PhotoUrl">photourl<Filter /></Variable>
+      </Variables>
+      <Outputs AllowEmpty="false">
+        <Output Type="ContactUrl" Passes="0" Value="[ContactUrlPrefix][ContactID][ContactUrlSuffix]" />
+        <Output Type="FirstName" Passes="0" Value="[FirstName]" />
+        <Output Type="LastName" Passes="0" Value="[LastName]" />
+        <Output Type="CompanyName" Passes="0" Value="[CompanyName]" />
+        <Output Type="Email" Passes="0" Value="[Email]" />
+        <Output Type="PhoneMobile" Passes="0" Value="[PhoneMobile]" />
+        <Output Type="PhoneMobile2" Passes="0" Value="[PhoneMobile2]" />
+        <Output Type="PhoneHome" Passes="0" Value="[PhoneHome]" />
+        <Output Type="PhoneHome2" Passes="0" Value="[PhoneHome2]" />
+        <Output Type="PhoneBusiness" Passes="0" Value="[PhoneBusiness]" />
+        <Output Type="PhoneBusiness2" Passes="0" Value="[PhoneBusiness2]" />
+        <Output Type="PhoneOther" Passes="0" Value="[PhoneOther]" />
+        <Output Type="FaxBusiness" Passes="0" Value="[FaxBusiness]" />
+        <Output Type="FaxHome" Passes="0" Value="[FaxHome]" />
+        <Output Type="Pager" Passes="0" Value="[Pager]" />
+        <Output Type="PhotoUrl" Passes="0" Value="[PhotoUrl]" />
+        <Output Type="EntityType" Passes="0" Value="Contacts" />
+        <Output Type="EntityId" Passes="0" Value="[ContactID]" />
+      </Outputs>
+    </Scenario>
+  </Scenarios>
+</Crm>
